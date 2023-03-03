@@ -1,7 +1,7 @@
 import axios from 'axios'
 import authHeader from './auth-header'
 
-const API_URL = 'http://educa-application-web.eastus.cloudapp.azure.com/'
+const API_URL = 'http://localhost:80/'
 
 const registerStudent = (data) => {
   return axios.post(API_URL + 'api/usuarios/estudantes/', data)
