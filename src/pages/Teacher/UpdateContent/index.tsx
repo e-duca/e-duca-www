@@ -14,7 +14,6 @@ type Props = {
 }
 
 export const UpdateContent = ({ onClose, contentId }: Props) => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [habilities, setHabilities] = useState<any[]>([])
   const [hability, setHability] = useState("")
   const [type, setType] = useState("")
@@ -185,7 +184,6 @@ export const UpdateContent = ({ onClose, contentId }: Props) => {
         <Button
           className={style.btnRegister}
           title="Atualizar"
-          // onChange={handleUpdateContent}
           onClick={handleUpdateContent}
         />
 

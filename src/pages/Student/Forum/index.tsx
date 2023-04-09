@@ -57,7 +57,9 @@ export const Forum = () => {
         }
       }
     )
+  }, [])
 
+  useEffect(() => {
     PostService.getTopic().then(
       (response: any) => {
         if (response.status == 204) {
@@ -74,7 +76,7 @@ export const Forum = () => {
         }
       }
     )
-  }, [])
+  }, [topics])
 
   const handleTopicClicked = (topic: any) => {
     console.log(topic)
@@ -124,10 +126,17 @@ export const Forum = () => {
                 lastName={topic.usuario.sobrenome}
               >
                 <div className={style.col}>
-                  <img src={iconEdit} onClick={() => handleEditClick(topic)} />
+                  <img
+                    src={iconEdit}
+                    onClick={() => handleEditClick(topic)}
+                    role="button"
+                    aria-label="editar tópico"
+                  />
                   <img
                     src={iconDelete}
                     onClick={() => handleDeleteClick(topic)}
+                    role="button"
+                    aria-label="deletar tópico"
                   />
                 </div>
               </CardTopic>
