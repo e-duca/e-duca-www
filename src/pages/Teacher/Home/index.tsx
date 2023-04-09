@@ -49,7 +49,9 @@ export const Home = () => {
         }
       }
     )
+  }, [])
 
+  useEffect(() => {
     PostService.getUserContent().then(
       (response: any) => {
         if (response.status == 204) {
@@ -66,7 +68,7 @@ export const Home = () => {
         }
       }
     )
-  }, [])
+  }, [teacherContent])
 
   function handleContentClick(post: any) {
     console.log(post)
@@ -162,10 +164,14 @@ export const Home = () => {
                 >
                   <div className={style.col}>
                     <img
+                      aria-label="atualizar conteúdo"
+                      role="button"
                       src={iconEdit}
                       onClick={() => handleEditClick(post.idConteudo)}
                     />
                     <img
+                      aria-label="deletar conteúdo"
+                      role="button"
                       src={iconDelete}
                       onClick={() => handleDeleteClick(post.idConteudo)}
                     />
