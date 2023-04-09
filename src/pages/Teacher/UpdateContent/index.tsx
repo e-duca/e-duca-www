@@ -16,8 +16,8 @@ type Props = {
 export const UpdateContent = ({ onClose, contentId }: Props) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [habilities, setHabilities] = useState<any[]>([])
-  const [hability, setHability] = useState()
-  const [type, setType] = useState(0)
+  const [hability, setHability] = useState("")
+  const [type, setType] = useState("")
   const [title, setTitle] = useState('')
   const [titleError, setTitleError] = useState<boolean>(false)
   const [workload, setWorkload] = useState('')
@@ -116,7 +116,7 @@ export const UpdateContent = ({ onClose, contentId }: Props) => {
         <Select
           text="Tipo"
           value={type}
-          onChange={(e: any) => setType(Number(e.target.value))}
+          onChange={(e: any) => setType(e.target.value)}
         >
           {SelectType.map((item) => (
             <option key={item.id} value={item.id}>
@@ -126,7 +126,7 @@ export const UpdateContent = ({ onClose, contentId }: Props) => {
           ))}
         </Select>
       </div>
-      {type === 1 ? (
+      {type === "1" ? (
         <>
           <Input
             text="Id do Vídeo"
@@ -144,7 +144,7 @@ export const UpdateContent = ({ onClose, contentId }: Props) => {
             {videoIdError && <p>Id do vídeo não pode ser vazio.</p>}
           </div>
         </>
-      ) : type === 2 ? (
+      ) : type === "2" ? (
         <>
           <Input
             text="Texto:"

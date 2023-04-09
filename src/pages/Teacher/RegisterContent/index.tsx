@@ -12,8 +12,8 @@ type Props = {
 
 export const RegisterContent = ({ onClose }: Props) => {
   const [habilities, setHabilities] = useState<any[]>([])
-  const [hability, setHability] = useState()
-  const [type, setType] = useState(0)
+  const [hability, setHability] = useState("")
+  const [type, setType] = useState("")
   const [title, setTitle] = useState('')
   const [titleError, setTitleError] = useState<boolean>(false)
   const [workload, setWorkload] = useState('')
@@ -55,9 +55,8 @@ export const RegisterContent = ({ onClose }: Props) => {
     if (
       data.titulo !== '' &&
       data.tempoEstimado !== '' &&
-      data.habilidade.codigo !== undefined &&
-      (data.texto !== '' ||
-      videoId !== '')
+      data.habilidade.codigo !== '' &&
+      (data.texto !== '' || videoId !== '')
     ) {
       PostService.registerContent(data).then(
         (response: any) => {
@@ -100,37 +99,29 @@ export const RegisterContent = ({ onClose }: Props) => {
       </div>
       <div className={style.cSelect}>
         <Select
-          placeholder="Selecione uma habilidade"
           text="Habilidade"
-          value={habilities}
+          value={hability}
           onChange={(e: any) => setHability(e.target.value)}
         >
-          <option>Selecione uma habilidade</option>
-
           {habilities?.map((habilidade) => {
             return (
-              <>
-                <option key={habilidade.idHabilidade}>
-                  {habilidade.codigo}
-                </option>
-                ;
-              </>
+              <option key={habilidade.idHabilidade}>{habilidade.codigo}</option>
             )
           })}
         </Select>
         <Select
           text="Tipo"
           value={type}
-          onChange={(e: any) => setType(Number(e.target.value))}
+          onChange={(e: any) => setType(e.target.value)}
         >
           {SelectType.map((item) => (
-            <>
-              <option value={item.id}> {item.title}</option>
-            </>
+            <option key={item.id} value={item.id}>
+              {item.title}
+            </option>
           ))}
         </Select>
       </div>
-      {type === 1 ? (
+      {type === "1" ? (
         <>
           <Input
             text="Id do vídeo:"
@@ -148,7 +139,7 @@ export const RegisterContent = ({ onClose }: Props) => {
             {videoIdError && <p>Id do vídeo não pode ser vazio.</p>}
           </div>
         </>
-      ) : type === 2 ? (
+      ) : type === "2" ? (
         <>
           <Input
             text="Texto:"
