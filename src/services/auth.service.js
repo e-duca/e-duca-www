@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const API_URL = 'http://ec2-3-226-222-15.compute-1.amazonaws.com/'
+const API_URL = 'http://ec2-52-45-233-165.compute-1.amazonaws.com/'
 
 const signup = (data) => {
   return axios
