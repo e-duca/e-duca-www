@@ -1,7 +1,7 @@
 import axios from 'axios'
 import authHeader from './auth-header'
 
-const API_URL = 'http://ec2-52-45-233-165.compute-1.amazonaws.com/'
+const API_URL = 'https://educaback.hopto.org/'
 
 const registerStudent = (data) => {
   return axios.post(API_URL + 'api/usuarios/estudantes/', data)
