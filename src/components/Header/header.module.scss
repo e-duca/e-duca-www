@@ -4,7 +4,7 @@
   display: flex;
   font-size: 13px;
   align-items: center;
-  background-color: $purple-800;
+  background-color: $blue-900;
   height: 80px;
   padding: 20px 0px;
 
@@ -54,7 +54,6 @@
   .menu {
     display: flex;
     gap: 16px;
-    background-color: $purple-800;
 
     &__closed {
       @include mobile {

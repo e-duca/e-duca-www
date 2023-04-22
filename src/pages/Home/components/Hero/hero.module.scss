@@ -1,7 +1,7 @@
 @import '../../../../styles/sass/main.scss';
 
 .container {
-  background-color: $purple-800;
+  background-color: $blue-900;
   display: grid;
   grid-template-columns: repeat(2, 2fr);
   height: 70vh;
@@ -21,7 +21,7 @@
     margin-top: 48px;
 
     h1 {
-      color: $yellow-400;
+      color: #54c9e0;
       width: auto;
       font-weight: 700;
       font-size: 48px;
@@ -41,7 +41,7 @@
       font-size: 18px;
       line-height: 24px;
       span {
-        color: #33c3df;
+        color: $yellow-500;
         font-weight: 700;
       }
   
