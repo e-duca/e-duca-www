@@ -1,5 +1,5 @@
 import style from './hero.module.scss'
-import img from '../../../../assets/img/galax.svg'
+// import img from '../../../../assets/img/galax.svg'
 
 export default function Hero() {
   return (
@@ -15,7 +15,7 @@ export default function Hero() {
         </p>
       </div>
       <div className={style.hero}>
-        <img src={img} alt="space galax" />
+        <img src="../../images/galax.svg" alt="space galax" />
       </div>
     </section>
   )
