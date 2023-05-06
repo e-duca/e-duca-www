@@ -31,7 +31,7 @@ export const Theme = ({ children, img, isTeacher }: Props) => {
             className={`${isTeacher ? `${style.btnTeacherSelected}` : `${style.btnTeacher}`}`}
           />
 
-          <img src={img} />
+          <img src={img} className={style.image} alt=""/>
         </div>
       </div>
     </>
