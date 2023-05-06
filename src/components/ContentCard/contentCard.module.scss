@@ -15,7 +15,6 @@
   &:hover {
     background-color: #d7e9ff;
     transition: 0.5s;
-    cursor: pointer;
   }
 
   .circle {
@@ -23,11 +22,13 @@
     border-radius: 50%;
     width: 70px;
     height: 70px;
+    cursor: pointer;
   }
   .content {
     display: grid;
     grid-template-columns: 3fr 1fr;
-
+    cursor: pointer;
+    
     .text {
       display: grid;
       grid-template-rows: 0fr 1fr;

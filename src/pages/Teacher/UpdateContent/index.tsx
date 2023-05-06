@@ -105,7 +105,6 @@ export const UpdateContent = ({ onClose, contentId }: Props) => {
           value={hability}
           onChange={(e: any) => setHability(e.target.value)}
         >
-          <option>Selecione uma habilidade</option>
           {habilities?.map((habilidade) => {
             return (
               <option key={habilidade.idHabilidade}>{habilidade.codigo}</option>
