@@ -9,6 +9,14 @@
   justify-items: center;
   box-sizing: border-box;
 
+  @include tablet {
+    display: flex;
+    flex-direction: column-reverse;
+    padding: 0px;
+    justify-content: center;
+    align-items: center;
+  }
+
   @include mobile {
     display: flex;
     flex-direction: column-reverse;
@@ -29,6 +37,10 @@
       width: 100%;
       margin: 16px;
       border-radius: 66px;
+    }
+
+    @include tablet {
+      margin: 24px 0;
     }
 
     .step {
@@ -56,7 +68,6 @@
 
     @include mobile {
       margin-top: 56px;
-      
     }
   }
 
@@ -90,6 +101,10 @@
     height: 500px;
 
     @include mobile {
+      display: none;
+    }
+
+    @include tablet {
       display: none;
     }
   }
