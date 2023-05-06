@@ -7,12 +7,29 @@
   background-color: $purple-900;
   padding: 20px 160px 20px 160px;
   justify-items: center;
+  box-sizing: border-box;
+
+  @include mobile {
+    display: flex;
+    flex-direction: column-reverse;
+    padding: 0px;
+    justify-content: center;
+    align-items: center;
+  }
 
   .containerForm {
+    width: 438px;
     background-color: $white;
-    padding: 60px;
+    padding: 56px 32px;
     border-radius: 96px;
-    height: max-content;
+    box-sizing: border-box;
+
+    @include mobile {
+      max-width: 310px;
+      width: 100%;
+      margin: 16px;
+      border-radius: 66px;
+    }
 
     .step {
       display: grid;
@@ -36,6 +53,11 @@
     color: $yellow-300;
     font-size: $subtitle;
     font-weight: 600;
+
+    @include mobile {
+      margin-top: 56px;
+      
+    }
   }
 
   .btnStudent {
@@ -66,5 +88,9 @@
   
   img {
     height: 500px;
+
+    @include mobile {
+      display: none;
+    }
   }
 }
