@@ -21,12 +21,12 @@ export const ContentCard = ({
   onClick
 }: Props) => {
   return (
-    <div className={style.card} key={contentId} onClick={onClick}>
-      <div className={style.circle}>
-        <img src={img} />
+    <div className={style.card} key={contentId}>
+      <div className={style.circle} onClick={onClick}>
+        <img src={img} alt="" />
       </div>
       <div className={style.content}>
-        <div className={style.text}>
+        <div className={style.text} onClick={onClick}>
           <h2>{title}</h2>
           <span className={style.highlight}>{hability}</span>
         </div>
