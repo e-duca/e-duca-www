@@ -20,7 +20,7 @@ export const Greeting = ({ name, text, img }: Props) => {
           </div>
         </div>
           <div className={style.imageGreeting}>
-            <img src={img} />
+            <img src={img} alt=""/>
           </div>
       </div>
     </>
