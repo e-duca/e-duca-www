@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const API_URL = 'https://educaback.hopto.org/'
+const API_URL = 'https://educabacktest.hopto.org/'
 
 const signup = (data) => {
   return axios
