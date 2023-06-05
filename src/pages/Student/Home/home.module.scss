@@ -1,14 +1,11 @@
 @import '../../../styles/sass/main.scss';
 
 .container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   background-color: $white;
+  margin: 0px 164px;
 
-  .innerContainer {
+  .innerContainerHome {
     max-height: 100vh;
-    margin: auto;
     overflow: scroll;
 
     &::-webkit-scrollbar {
@@ -16,6 +13,17 @@
       background: transparent;
       display: none;
     }
+
+    .cSearchBar {
+      position: fixed;
+      top: 0;
+      right: 0;
+      height: 100px;
+      background-color: $white;
+      z-index: 1;
+      margin: 0 225px;
+    }
+
   }
 
   .cBtn {
@@ -28,7 +36,7 @@
 
     .btn {
       width: 136px;
-      color: #f5f5f5;
+      color: $white;
       margin: 40px 0;
       border: $purple-100 2px solid;
       background: $purple-100;
@@ -56,6 +64,8 @@
     display: flex;
     flex-direction: column;
     gap: 32px;
-    margin-bottom: 50px;
+    margin: 100px 36px;
+
   }
+
 }

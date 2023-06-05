@@ -1,5 +1,6 @@
 import { ReactNode } from 'react'
 import style from './contentCard.module.scss'
+import { format } from 'date-fns';
 
 type Props = {
   contentId: number
@@ -9,6 +10,7 @@ type Props = {
   img?: string
   children?: ReactNode
   onClick?: () => void
+
 }
 
 export const ContentCard = ({
@@ -20,6 +22,9 @@ export const ContentCard = ({
   contentId,
   onClick
 }: Props) => {
+
+  const formattedDate = format(new Date(date), 'dd/MM/yyyy');
+
   return (
     <div className={style.card} key={contentId}>
       <div className={style.circle} onClick={onClick}>
@@ -31,7 +36,7 @@ export const ContentCard = ({
           <span className={style.highlight}>{hability}</span>
         </div>
         <div className={style.date}>
-          <p>Postada em {date}</p>
+          <p>Postada em {formattedDate}</p>
           {children}
         </div>
       </div>

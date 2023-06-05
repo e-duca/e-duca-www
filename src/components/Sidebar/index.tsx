@@ -27,7 +27,7 @@ export const Sidebar = ({
   lastName,
   handleChosenItem
 }: // selectedItem
-Props) => {
+  Props) => {
   const navigate = useNavigate()
 
   const handleLogout = () => {
@@ -55,8 +55,8 @@ Props) => {
             photo={perfilStudent}
             name={`${name} ${lastName}`}
             userType="Aluno(a)"
-            labOne="Nivel"
-            nivel={1}
+          //labOne="Nivel"
+          //nivel={1}
           />
         )}
         <div className={style.navigation}>

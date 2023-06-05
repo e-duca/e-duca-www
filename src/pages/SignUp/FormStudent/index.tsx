@@ -209,16 +209,17 @@ export const FormStudent = () => {
           </div>
 
           <Button
+            className={style.btnNext}
+            title="Finalizar cadastro"
+            onClick={handleSubmit}
+          />
+
+          <Button
             className={style.btnLogin}
             path="/login"
             title="Ir para login"
           />
 
-          <Button
-            className={style.btnNext}
-            title="Finalizar cadastro"
-            onClick={handleSubmit}
-          />
         </div>
       </Theme>
     </>

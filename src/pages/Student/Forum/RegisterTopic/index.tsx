@@ -1,7 +1,7 @@
 import style from './registerQuestion.module.scss'
 import { Input } from '../../../../components/Input'
 import { Button } from '../../../../components/Button'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import PostService from '../../../../services/post.service'
 
 type Props = {
@@ -9,9 +9,10 @@ type Props = {
 }
 
 export const RegisterTopic = ({ onClose }: Props) => {
-  const [subject, setSubject] = useState<string>("")
-  const [description, setDescription] = useState<string>("")
+  const [subject, setSubject] = useState<string>('')
+  const [description, setDescription] = useState<string>('')
   const [errorMessage, setErrorMessage] = useState<boolean>(false)
+  const [characterCount, setCharacterCount] = useState<number>(0)
 
   const data = {
     titulo: subject,
@@ -36,6 +37,17 @@ export const RegisterTopic = ({ onClose }: Props) => {
     }
   }
 
+  const handleDescriptionChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const value = e.target.value;
+    if (value.length <= 200) {
+      setDescription(value);
+      setCharacterCount(value.length);
+    }
+  };
+
+  useEffect(() => {
+    setCharacterCount(description.length);
+  }, [description]);
   return (
     <div className={style.box}>
       <Input
@@ -48,8 +60,9 @@ export const RegisterTopic = ({ onClose }: Props) => {
       <label>Descrição:</label>
       <textarea
         value={description}
-        onChange={(e: any) => setDescription(e.target.value)}
+        onChange={handleDescriptionChange}
       />
+      <p>Caracteres restantes: {200 - characterCount} </p>
       <div className={style.error}>
         {errorMessage && <p>Assunto e/ou descrição não podem ser vazios.</p>}
       </div>

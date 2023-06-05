@@ -31,6 +31,7 @@
     padding: 56px 32px;
     border-radius: 96px;
     box-sizing: border-box;
+    height: max-content;
 
     @include mobile {
       max-width: 310px;
@@ -82,7 +83,7 @@
     border: $purple-100 2px solid;
     width: 230px;
     margin: 10px 0;
-}
+  }
 
   .btnStudentSelected {
     width: 230px;
@@ -96,7 +97,7 @@
     color: $purple-900;
     margin: 10px 0;
   }
-  
+
   img {
     height: 500px;
 

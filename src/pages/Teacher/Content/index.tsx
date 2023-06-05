@@ -6,9 +6,6 @@ import style from './content.module.scss'
 import { Reading } from '../../../components/Reading'
 import { Button } from '../../../components/Button'
 import { VideoClass } from '../../../components/VideoClass'
-import { Card } from '../Overview/Card'
-import iconImport from '../../../assets/img/box.png'
-import iconExport from '../../../assets/img/uploading.png'
 import iconDocument from '../../../assets/img/documents.png'
 
 export const Content = () => {
@@ -79,41 +76,32 @@ export const Content = () => {
               className={style.btn}
               title="<< Voltar"
               onClick={() => {
-                setIsContentClicked(false)
-                setIsVideo(false)
+                setIsContentClicked(false);
+                setIsVideo(false);
               }}
             />
           </div>
         </>
       ) : (
-        <div className={style.innerContainer}>
-          <SearchBar
-            placeholder="Buscar conteúdo"
-            value={search}
-            onChange={(e: any) => setSearch(e.target.value)}
-          />
-          <div className={style.cOverviem}>
-            <Card
-              className={style.cardVisible}
-              img={iconExport}
-              text={'Exportar conteúdo'}
+        <div className={style.innerContainerContent}>
+          <div className={style.cSearchBar}>
+            <SearchBar
+              placeholder="Buscar conteúdo"
+              value={search}
+              onChange={(e: any) => setSearch(e.target.value)}
             />
-            <Card
-              className={style.cardAdd}
-              img={iconImport}
-              text="Importar conteúdo"
-            />
+           
           </div>
           <div className={style.cards}>
             {content &&
               content
                 .filter((post) => {
                   if (search == '') {
-                    return post
+                    return post;
                   } else if (
                     post.titulo.toLowerCase().includes(search.toLowerCase())
                   ) {
-                    return post
+                    return post;
                   }
                 })
                 .map((post: any) => (
@@ -131,5 +119,5 @@ export const Content = () => {
         </div>
       )}
     </div>
-  )
-}
+  );
+}  

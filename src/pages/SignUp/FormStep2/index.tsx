@@ -1,9 +1,7 @@
 import style from './formStep2.module.scss'
 import { Theme } from '../components/Theme'
-import { Link } from 'react-router-dom'
 import { ChangeEvent, useEffect, useState } from 'react'
 import { FormActions, useForm } from '../../../utils/contexts/FormContext'
-import { CheckCircleOutline, RadioButtonUnchecked } from '@mui/icons-material'
 import img from '../../../assets/img/image11.svg'
 import { Button } from '../../../components/Button'
 import PostService from '../../../services/post.service'
@@ -93,7 +91,7 @@ export const FormStep2 = () => {
     <>
       <Theme img={img} isTeacher>
         <div className={style.container}>
-        <div className={style.sucess}>
+          <div className={style.sucess}>
             {sucessMessage && <h3>Cadastro realizado com sucesso!</h3>}
           </div>
           <Input
@@ -108,7 +106,7 @@ export const FormStep2 = () => {
               }
             }}
           />
-           <div className={style.error}>
+          <div className={style.error}>
             {emailError && <p>Por favor, preencha o email</p>}
           </div>
           <Input
@@ -145,30 +143,18 @@ export const FormStep2 = () => {
           <div className={style.error}>
             {!isSamePassword && <p>As senhas não coincidem.</p>}
           </div>
-          <div className={style.cCheck}>
-            <CheckCircleOutline id={''} />
-            <p>Aceito receber promoções e novidades por e-mail.</p>
-            <RadioButtonUnchecked id={''} />
-            <div>
-              <p>Ao me cadastrar afirmo que estou de acordo com os</p>
-              <Link to={'/'}>
-                <a>Termos de Uso e Privacidade.</a>
-              </Link>
-            </div>
-          </div>
           {invalid && (
-              <p>Por favor, preencha todos os campos corretamente.</p>
-            )}
-          <Button
-            className={style.btnLogin}
-            title="Voltar"
-            path="/cadastro/professor/etapa1"
-          />
-
+            <p>Por favor, preencha todos os campos corretamente.</p>
+          )}
           <Button
             className={style.btnNext}
             title="Finalizar cadastro"
             onClick={handleNextStep}
+          />
+          <Button
+            className={style.btnLogin}
+            title="Voltar"
+            path="/cadastro/professor/etapa1"
           />
         </div>
       </Theme>

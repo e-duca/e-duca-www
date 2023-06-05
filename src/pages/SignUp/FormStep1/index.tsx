@@ -163,15 +163,14 @@ export const FormStep1 = () => {
             )}
           </div>
           <Button
-            className={style.btnLogin}
-            title="Ir para login"
-            path="/login"
-          />
-
-          <Button
             className={style.btnNext}
             title="Continuar"
             onClick={handleNextStep}
+          />
+          <Button
+            className={style.btnLogin}
+            title="Ir para login"
+            path="/login"
           />
         </div>
       </Theme>

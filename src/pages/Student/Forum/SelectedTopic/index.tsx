@@ -6,6 +6,7 @@ import iconEdit from '../../../../assets/img/edit.svg'
 import iconDelete from '../../../../assets/img/delet.svg'
 import { Modal } from '../../../../components/Modal'
 import { UpdateAnswer } from '../UpdateAnswer'
+import { format } from 'date-fns';
 
 type Props = {
   onClose?: () => void
@@ -67,6 +68,8 @@ export const SelectedTopic = ({ onClose, selectedTopic, student }: Props) => {
     )
   }
 
+  const formattedDateQuestion = format(new Date(selectedTopic.dataCriacao), 'dd/MM/yyyy');
+
   return (
     <div className={style.box}>
       <div className={style.row}>
@@ -77,7 +80,7 @@ export const SelectedTopic = ({ onClose, selectedTopic, student }: Props) => {
           </div>
           <div className={style.cInfo}>
             <h6>
-              Postada em {selectedTopic.dataCriacao} por {selectedTopic.nome}
+              Postada em {formattedDateQuestion} por {selectedTopic.nome}
               {selectedTopic.sobrenome}
             </h6>
             <button
@@ -98,9 +101,9 @@ export const SelectedTopic = ({ onClose, selectedTopic, student }: Props) => {
             </div>
             <div className={style.date}>
               <div>
-                Respondido em <span> {answer.dataCriacao} </span> por
+                Respondido em <span> {new Date(answer.dataCriacao).toLocaleDateString('pt-BR')} </span> por
                 <span>
-                   {" "}{answer.usuario.nome} {answer.usuario.sobrenome}
+                  {" "}{answer.usuario.nome} {answer.usuario.sobrenome}
                 </span>
               </div>
               {student.name == selectedTopic.respostas[index].usuario.nome && (
@@ -135,9 +138,11 @@ export const SelectedTopic = ({ onClose, selectedTopic, student }: Props) => {
               title="Salvar resposta"
               onClick={saveAnswer}
             />
+
             <div className={style.error}>
               {invalid && <p>Resposta não pode ser vazia.</p>}
             </div>
+
           </div>
         )}
       </div>
