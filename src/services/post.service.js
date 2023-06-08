@@ -39,6 +39,12 @@ const registerRating = (data) => {
   return axios.post(API_URL + 'api/conteudos/avaliacoes', data, { headers: authHeader() })
 }
 
+const getUserRatings = () => {
+  return axios.get(API_URL + 'api/conteudos/avaliacoes/usuario-secao', {
+    headers: authHeader()
+  })
+}
+
 const updateContent = (id, data) => {
   return axios.put(API_URL + `api/conteudos/${id}`, data, {
     headers: authHeader()
@@ -109,7 +115,8 @@ const postService = {
   registerTeacher,
   registerAnswer,
   deleteAnswer,
-  updateAnswer
+  updateAnswer,
+  getUserRatings
 }
 
 export default postService
