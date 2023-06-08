@@ -25,6 +25,7 @@ export const Home = () => {
   const [isEditModalVisible, setIsEditModalVisible] = useState(false)
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false)
   const [teacherContent, setTeacherContent] = useState<any[]>([])
+  const [ratings, setRatings] = useState<number>(0)
   const [teacher, setTeacher] = useState({
     name: '',
     lastName: '',
@@ -49,6 +50,19 @@ export const Home = () => {
         }
       }
     )
+
+    PostService.getUserRatings().then(
+      (response: any) => {
+        console.log("RESPONSE USER RATINGS", response)
+        setRatings(response.data.avaliacao)
+      },
+      (error: any) => {
+        console.log('HOME/Professor/getUserRating: Erro', error.response)
+        if (error.response && error.response.status === 403) {
+          console.log('HOME/Professor/getUserRating: Erro de autenticação')
+        }
+      }
+    )
   }, [])
 
   useEffect(() => {
@@ -68,6 +82,7 @@ export const Home = () => {
         }
       }
     )
+    console.log("disparou o TEACHER CONTENT")
   }, [teacherContent])
 
   function handleContentClick(post: any) {
@@ -140,7 +155,7 @@ export const Home = () => {
             img={img}
             text={'Pronto para começar uma nova aula?'}
           />
-          <Overview conteudos={teacherContent.length} avaliacoes={0} />
+          <Overview conteudos={teacherContent.length} avaliacoes={ratings} />
           <div className={style.text}>
             <h2>Meus conteúdos</h2>
             <span>Ver todos</span>
