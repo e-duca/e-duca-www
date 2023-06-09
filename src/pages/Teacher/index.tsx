@@ -6,7 +6,6 @@ import PostService from '../../services/post.service'
 import style from './teacher.module.scss'
 import { Home } from './Home'
 import { Content } from './Content'
-import styleContent from '../Teacher/Content/content.module.scss'
 
 export const Teacher = () => {
   const [chosenComponent, setChosenComponent] = useState(<Home />)
@@ -70,7 +69,7 @@ export const Teacher = () => {
         handleChosenItem={handleChosenItem}
         selectedItem={chosenItem}
       />
-      <div className={chosenItem === 'Ver todos' ? styleContent.innerContainerContent : style.innerContainer}>{chosenComponent}</div>
+      <div className={style.innerContainer}>{chosenComponent}</div>
 
     </div>
   )

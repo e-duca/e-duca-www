@@ -5,7 +5,6 @@ import { Topics } from './Forum/Topics'
 import { Home } from './Home'
 import PostService from '../../services/post.service'
 import style from './student.module.scss'
-import styleHome from '../Home/home.module.scss'
 
 export const Student = () => {
   const [chosenComponent, setChosenComponent] = useState(<Home />)
@@ -60,7 +59,7 @@ export const Student = () => {
         handleChosenItem={handleChosenItem}
         selectedItem={chosenItem}
       />
-      <div className={chosenItem === 'Fórum de dúvidas' || chosenItem === 'Meus tópicos' ? style.innerContainer : styleHome.innerContainerHome}>{chosenComponent}</div>
+      <div className={style.innerContainer}>{chosenComponent}</div>
 
     </div>
   )

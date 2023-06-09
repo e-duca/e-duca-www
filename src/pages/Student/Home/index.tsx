@@ -84,7 +84,7 @@ export const Home = () => {
           </div>
         </>
       ) : (
-        <div className={style.innerContainerHome}>
+        <div className={style.innerContainer}>
           <div className={style.cSearchBar}>
             <SearchBar
               placeholder="O que você deseja estudar hoje?"

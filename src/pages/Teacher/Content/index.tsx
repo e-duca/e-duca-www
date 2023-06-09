@@ -57,6 +57,7 @@ export const Content = () => {
         <>
           {isVideo ? (
             <VideoClass
+              isTeacher
               contentId={contentClicked.id}
               name={contentClicked.nome}
               lastName={contentClicked.sobrenome}
@@ -66,6 +67,7 @@ export const Content = () => {
             />
           ) : (
             <Reading
+              isTeacher
               contentId={contentClicked.id}
               title={contentClicked.titulo}
               text={contentClicked.texto}
@@ -83,14 +85,13 @@ export const Content = () => {
           </div>
         </>
       ) : (
-        <div className={style.innerContainerContent}>
+        <div className={style.innerContainer}>
           <div className={style.cSearchBar}>
             <SearchBar
               placeholder="Buscar conteúdo"
               value={search}
               onChange={(e: any) => setSearch(e.target.value)}
             />
-           
           </div>
           <div className={style.cards}>
             {content &&

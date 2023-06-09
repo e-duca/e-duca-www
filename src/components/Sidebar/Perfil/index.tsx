@@ -6,7 +6,6 @@ type Props = {
   userType: string
   careerTime?: string
   occupation?: string
-  nivel?: number
   labOne?: String
   labtwo?: String
 }
@@ -17,7 +16,6 @@ export const Perfil = ({
   userType,
   careerTime,
   occupation,
-  nivel,
   labOne,
   labtwo
 }: Props) => {
@@ -29,7 +27,7 @@ export const Perfil = ({
         <h4>{userType}</h4>
         <span className={style.info}>
           <p>{labOne}</p>
-          {careerTime} {nivel}
+          {careerTime}
           <p>{labtwo}</p>
           {occupation}
         </span>

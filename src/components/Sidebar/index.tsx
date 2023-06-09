@@ -8,6 +8,7 @@ import { MenuItemsStudent } from './MenuItemsStudent'
 import { Button } from '../Button'
 import AuthService from '../../services/auth.service'
 import { useNavigate } from 'react-router-dom'
+import { differenceInYears, parseISO } from 'date-fns';
 
 type Props = {
   isTeacher?: boolean
@@ -18,6 +19,7 @@ type Props = {
   handleChosenItem: any
   selectedItem: any
 }
+
 
 export const Sidebar = ({
   isTeacher,
@@ -36,6 +38,25 @@ export const Sidebar = ({
     window.location.reload()
   }
 
+  // Função para tratar a data e calcular a quantidade de anos de carreira
+  const calculateCareerTime = (startDate: string) => {
+    if (!startDate) {
+      return ''; // Retorna uma string vazia se a data não estiver definida
+    }
+
+    try {
+      const currentDate = new Date(); // Data atual
+      const startDateObj = parseISO(startDate); // Converte a string da data de início para um objeto Date
+
+      const yearsDiff = differenceInYears(currentDate, startDateObj); // Calcula a diferença em anos
+
+      return String(yearsDiff); // Retorna a quantidade de anos como uma string
+    } catch (error) {
+      console.error('Erro ao calcular a quantidade de anos de carreira:', error);
+      return ''; // Retorna uma string vazia em caso de erro
+    }
+  };
+
   return (
     <>
       <div className={style.container}>
@@ -46,7 +67,7 @@ export const Sidebar = ({
             name={`${name} ${lastName}`}
             userType="Professor(a)"
             labOne="Tempo de carreira:"
-            careerTime={`${careerTime} anos`}
+            careerTime={`${calculateCareerTime(careerTime || '')} anos`}
             labtwo="Área de atuação:"
             occupation={occupation}
           />
@@ -55,8 +76,6 @@ export const Sidebar = ({
             photo={perfilStudent}
             name={`${name} ${lastName}`}
             userType="Aluno(a)"
-          //labOne="Nivel"
-          //nivel={1}
           />
         )}
         <div className={style.navigation}>
