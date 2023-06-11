@@ -18,21 +18,23 @@ import iconEmpty from '../../../assets/img/empty.svg'
 
 export const Forum = () => {
   const [isAnswerModalVisible, setAnswerIsModalVisible] = useState(false)
-  const [isEditModalVisible, setIsEditModalVisible] = useState(false)
-  const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false)
   const [isAddModalVisible, setIsAddModalVisible] = useState(false)
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const [currentTopic, setCurrentTopic] = useState()
+  const [modalType, setModalType] = useState("");
 
   const handleEditClick = (topic: any) => {
-    console.log(topic)
-    setIsEditModalVisible(true)
-    setCurrentTopic(topic)
-  }
+    console.log(topic);
+    setModalType("edit");
+    setCurrentTopic(topic);
+    setIsModalVisible(true);
+  };
 
   const handleDeleteClick = (topic: any) => {
-    setIsDeleteModalVisible(true)
-    setCurrentTopic(topic)
-  }
+    setModalType("delete");
+    setCurrentTopic(topic);
+    setIsModalVisible(true);
+  };
 
   const [topics, setTopics] = useState<any[]>([])
   const [isTopicsEmpty, setIsTopicEmpty] = useState<boolean>(false)
@@ -143,7 +145,7 @@ export const Forum = () => {
             ))
           )}
 
-          {isAnswerModalVisible && (
+          {isAnswerModalVisible && !isModalVisible && (
             <Modal
               isOpen={isAnswerModalVisible}
               onClose={() => setAnswerIsModalVisible(false)}
@@ -156,40 +158,44 @@ export const Forum = () => {
             </Modal>
           )}
 
-          {isAddModalVisible ? (
-            <>
-              <Modal
-                isOpen={isAddModalVisible}
-                onClose={() => setIsAddModalVisible(false)}
-              >
-                <RegisterTopic onClose={() => setIsAddModalVisible(false)} />
-              </Modal>
-            </>
-          ) : isEditModalVisible ? (
-            <>
-              <Modal
-                isOpen={isEditModalVisible}
-                onClose={() => setIsEditModalVisible(false)}
-              >
+
+          {isAddModalVisible && (
+            <Modal
+              isOpen={isAddModalVisible}
+              onClose={() => setIsAddModalVisible(false)}
+            >
+              <RegisterTopic onClose={() => setIsAddModalVisible(false)} />
+            </Modal>
+
+          )}
+
+          {isModalVisible && (
+            <Modal
+              isOpen={isModalVisible}
+              onClose={() => {
+                setIsModalVisible(false);
+                setAnswerIsModalVisible(false);
+              }}
+            >
+              {modalType === "edit" && (
                 <UpdateTopic
                   selectedTopic={currentTopic}
-                  onClose={() => setIsEditModalVisible(false)}
+                  onClose={() => {
+                    setIsModalVisible(false);
+                    setAnswerIsModalVisible(false);
+                  }}
                 />
-              </Modal>
-            </>
-          ) : isDeleteModalVisible ? (
-            <>
-              <Modal
-                isOpen={isDeleteModalVisible}
-                onClose={() => setIsDeleteModalVisible(false)}
-              >
+              )}
+              {modalType === "delete" && (
                 <DeleteTopic
                   selectedTopic={currentTopic}
-                  onClose={() => setIsDeleteModalVisible(false)}
-                />
-              </Modal>
-            </>
-          ) : null}
+                  onClose={() => {
+                    setIsModalVisible(false);
+                    setAnswerIsModalVisible(false);
+                  }} />
+              )}
+            </Modal>
+          )}
         </div>
       </div>
     </div>

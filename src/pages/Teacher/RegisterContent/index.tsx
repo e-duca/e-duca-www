@@ -5,6 +5,9 @@ import { Select } from '../../../components/Select'
 import { useState, useEffect } from 'react'
 import { SelectType } from './SelectType'
 import PostService from '../../../services/post.service'
+import { UpdateSuccess } from '../UpdateContent/UpdateSuccess'
+import { Modal } from '../../../components/Modal'
+
 
 type Props = {
   onClose: () => void
@@ -23,6 +26,7 @@ export const RegisterContent = ({ onClose }: Props) => {
   const [videoId, setVideoId] = useState('')
   const [videoIdError, setVideoIdError] = useState<boolean>(false)
   const [invalid, setInvalid] = useState<boolean>(false)
+  const [showUpdateSuccess, setShowUpdateSuccess] = useState(false);
 
   const data = {
     titulo: title,
@@ -61,7 +65,7 @@ export const RegisterContent = ({ onClose }: Props) => {
       PostService.registerContent(data).then(
         (response: any) => {
           console.log(response.data)
-          onClose()
+          setShowUpdateSuccess(true)
         },
         (error: any) => {
           console.log(
@@ -80,109 +84,139 @@ export const RegisterContent = ({ onClose }: Props) => {
     }
   }
 
-  return (
-    <div className={style.box}>
-      <Input
-        text="Título:"
-        type="text"
-        placeholder="Exemplo"
-        value={title}
-        onChange={(e: any) => setTitle(e.target.value)}
-        onBlur={() => {
-          if (data.titulo === '') {
-            setTitleError(true)
-          }
-        }}
-      />
-      <div className={style.error}>
-        {titleError && <p>Título não pode ser vazio.</p>}
-      </div>
-      <div className={style.cSelect}>
-        <Select
-          text="Habilidade"
-          value={hability}
-          onChange={(e: any) => setHability(e.target.value)}
-        >
-          {habilities?.map((habilidade) => {
-            return (
-              <option key={habilidade.idHabilidade}>{habilidade.codigo}</option>
-            )
-          })}
-        </Select>
-        <Select
-          text="Tipo"
-          value={type}
-          onChange={(e: any) => setType(e.target.value)}
-        >
-          {SelectType.map((item) => (
-            <option key={item.id} value={item.id}>
-              {item.title}
-            </option>
-          ))}
-        </Select>
-      </div>
-      {type === "1" ? (
-        <>
-          <Input
-            text="Id do vídeo:"
-            type="url"
-            placeholder="https://www.youtube.com/IdVideo"
-            value={videoId}
-            onChange={(e: any) => setVideoId(e.target.value)}
-            onBlur={() => {
-              if (videoId === '') {
-                setVideoIdError(true)
-              }
-            }}
-          />
-          <div className={style.error}>
-            {videoIdError && <p>Id do vídeo não pode ser vazio.</p>}
-          </div>
-        </>
-      ) : type === "2" ? (
-        <>
-          <Input
-            text="Texto:"
-            type="text"
-            placeholder="Exemplo"
-            value={texto}
-            onChange={(e: any) => setTexto(e.target.value)}
-            onBlur={() => {
-              if (data.texto === '') {
-                setTextoError(true)
-              }
-            }}
-          />
-          <div className={style.error}>
-            {textoError && <p>Texto deve estar entre 1 e 5000 caracteres.</p>}
-          </div>
-        </>
-      ) : null}
+  useEffect(() => {
+    if (showUpdateSuccess) {
+      const timer = setTimeout(() => {
+        setShowUpdateSuccess(false);
+      }, 2000);
+      return () => {
+        clearTimeout(timer);
+        onClose();
 
-      <Input
-        text="Carga horária estimada:"
-        type="number"
-        placeholder="10"
-        value={workload}
-        onChange={(e: any) => setWorkload(e.target.value)}
-        onBlur={() => {
-          if (data.tempoEstimado === '') {
-            setWorkloadError(true)
-          }
-        }}
-      />
-      <div className={style.error}>
-        {workloadError && <p>Carga horária não pode ser vazia.</p>}
-        {invalid && <p>Por favor, preencha todos os campos corretamente.</p>}
-      </div>
-      <div className={style.cBtn}>
-        <Button className={style.btnBack} title="Voltar" onClick={onClose} />
-        <Button
-          className={style.btnRegister}
-          title="Cadastrar"
-          onClick={() => registerContent()}
+      };
+    }
+  }, [showUpdateSuccess]);
+
+  return (
+    <>
+      <div className={style.box}>
+        <Input
+          text="Título:"
+          type="text"
+          placeholder="Exemplo"
+          value={title}
+          onChange={(e: any) => setTitle(e.target.value)}
+          onBlur={() => {
+            if (data.titulo === '') {
+              setTitleError(true)
+            }
+          }}
         />
+        <div className={style.error}>
+          {titleError && <p>Título não pode ser vazio.</p>}
+        </div>
+        <div className={style.cSelect}>
+          <Select
+            text="Habilidade"
+            value={hability}
+            onChange={(e: any) => setHability(e.target.value)}
+          >
+            {habilities?.map((habilidade) => {
+              return (
+                <option key={habilidade.idHabilidade}>{habilidade.codigo}</option>
+              )
+            })}
+          </Select>
+          <Select
+            text="Tipo"
+            value={type}
+            onChange={(e: any) => setType(e.target.value)}
+          >
+            {SelectType.map((item) => (
+              <option key={item.id} value={item.id}>
+                {item.title}
+              </option>
+            ))}
+          </Select>
+        </div>
+        {type === "1" ? (
+          <>
+            <Input
+              text="Id do vídeo:"
+              type="url"
+              placeholder="https://www.youtube.com/IdVideo"
+              value={videoId}
+              onChange={(e: any) => setVideoId(e.target.value)}
+              onBlur={() => {
+                if (videoId === '') {
+                  setVideoIdError(true)
+                }
+              }}
+            />
+            <div className={style.error}>
+              {videoIdError && <p>Id do vídeo não pode ser vazio.</p>}
+            </div>
+          </>
+        ) : type === "2" ? (
+          <>
+            <Input
+              text="Texto:"
+              type="text"
+              placeholder="Exemplo"
+              value={texto}
+              onChange={(e: any) => setTexto(e.target.value)}
+              onBlur={() => {
+                if (data.texto === '') {
+                  setTextoError(true)
+                }
+              }}
+            />
+            <div className={style.error}>
+              {textoError && <p>Texto deve estar entre 1 e 5000 caracteres.</p>}
+            </div>
+          </>
+        ) : null}
+
+        <Input
+          text="Carga horária estimada:"
+          type="number"
+          placeholder="10"
+          value={workload}
+          onChange={(e: any) => setWorkload(e.target.value)}
+          onBlur={() => {
+            if (data.tempoEstimado === '') {
+              setWorkloadError(true)
+            }
+          }}
+        />
+        <div className={style.error}>
+          {workloadError && <p>Carga horária não pode ser vazia.</p>}
+          {invalid && <p>Por favor, preencha todos os campos corretamente.</p>}
+        </div>
+        <div className={style.cBtn}>
+          <Button className={style.btnBack} title="Voltar" onClick={onClose} />
+          <Button
+            className={style.btnRegister}
+            title="Cadastrar"
+            onClick={() => registerContent()}
+          />
+        </div>
       </div>
-    </div>
+      {showUpdateSuccess && (
+        <Modal
+          isBottomless
+          isOpen={showUpdateSuccess}
+          onClose={() => {
+            setShowUpdateSuccess(false);
+            onClose();
+          }}
+        >
+          <UpdateSuccess onClose={() => {
+            setShowUpdateSuccess(false);
+            onClose();
+          }} />
+        </Modal>
+      )}
+    </>
   )
 }
