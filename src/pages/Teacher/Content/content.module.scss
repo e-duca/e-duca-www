@@ -16,6 +16,42 @@
       background: transparent;
       display: none;
     }
+
+    .cSearchBar {
+      position: sticky;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      top: 0;
+      height: 100px;
+      width: 870px;
+      background-color: $white;
+      z-index: 1;
+
+
+      .cOverviem {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        margin: 40px 0;
+        font-weight: 500;
+
+        img {
+          height: 32px;
+        }
+
+        .cardVisible {
+          height: 58px;
+          cursor: pointer;
+        }
+
+        .cardAdd {
+          background-color: $yellow-400;
+          color: $black;
+          height: 58px;
+          cursor: pointer;
+        }
+      }
+    }
   }
 
   .cBtn {
@@ -28,7 +64,7 @@
 
     .btn {
       width: 136px;
-      color: #f5f5f5;
+      color: $white;
       margin: 40px 0;
       border: $purple-100 2px solid;
       background: $purple-100;
@@ -38,28 +74,6 @@
         background: $purple-800;
         transition: 2s;
       }
-    }
-  }
-
-  .cOverviem {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    margin: 40px 0;
-    font-weight: 500;
-
-    img {
-      height: 32px;
-    }
-
-    .cardVisible {
-      height: 58px;
-      cursor: pointer;
-    }
-    .cardAdd {
-      background-color: $yellow-400;
-      color: $black;
-      height: 58px;
-      cursor: pointer;
     }
   }
 
@@ -79,5 +93,6 @@
     flex-direction: column;
     gap: 32px;
     margin-bottom: 50px;
+
   }
 }

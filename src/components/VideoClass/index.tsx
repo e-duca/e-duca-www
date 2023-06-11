@@ -4,6 +4,7 @@ import imgPlay from '../../assets/img/PlayVideo.svg'
 import { CardLikert } from '../CardLikert'
 
 type Props = {
+  isTeacher?: boolean
   title: string
   name: string
   lastName: string
@@ -13,6 +14,7 @@ type Props = {
 }
 
 export const VideoClass = ({
+  isTeacher,
   title,
   name,
   category,
@@ -25,7 +27,7 @@ export const VideoClass = ({
       <div className={style.container}>
         <div className={style.innerContainer}>
           <Video video={video} />
-          <div className={style.info}>
+          <div className={isTeacher ? `${style.teacherInfo}` : style.info}>
             <div className={style.containerTitle}>
               <div className={style.title}>
                 <img src={imgPlay} alt=" image Play video" />
@@ -39,7 +41,7 @@ export const VideoClass = ({
               </p>
               <div className={style.category}>{category}</div>
             </div>
-            <CardLikert contentId={contentId} />
+            {!isTeacher && <CardLikert contentId={contentId} />}
           </div>
         </div>
       </div>

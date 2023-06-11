@@ -70,6 +70,7 @@ export const Teacher = () => {
         selectedItem={chosenItem}
       />
       <div className={style.innerContainer}>{chosenComponent}</div>
+
     </div>
   )
 }

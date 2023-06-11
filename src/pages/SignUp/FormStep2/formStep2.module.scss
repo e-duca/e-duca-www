@@ -27,22 +27,6 @@
     width: 100%;
   }
 
-  .cCheck {
-    display: grid;
-    grid-template-columns: 0fr 1fr;
-    align-items: start;
-    font-size: 10px;
-
-    p {
-      line-height: 0.2rem;
-      margin-bottom: inherit;
-    }
-
-    a {
-      color: $blue-600;
-      line-height: 2;
-    }
-  }
   .error {
     height: 20px;
     color: rgb(255, 0, 255);
@@ -54,7 +38,7 @@
   .sucess {
     text-align: center;
 
-    p{
+    p {
       margin: 0;
     }
 

@@ -4,7 +4,7 @@
   display: grid;
   grid-template-columns: 0fr 1fr;
   gap: 16px;
-  // width: 800px;
+  width: 800px;
   height: 96px;
   padding: 9px 23px;
   border-radius: 20px;
@@ -24,11 +24,12 @@
     height: 70px;
     cursor: pointer;
   }
+
   .content {
     display: grid;
     grid-template-columns: 3fr 1fr;
     cursor: pointer;
-    
+
     .text {
       display: grid;
       grid-template-rows: 0fr 1fr;
@@ -51,6 +52,7 @@
         line-height: 0.1;
       }
     }
+
     .date {
       display: grid;
       align-content: space-between;

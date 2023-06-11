@@ -6,9 +6,11 @@ import iconEdit from '../../../../assets/img/edit.svg'
 import iconDelete from '../../../../assets/img/delet.svg'
 import { Modal } from '../../../../components/Modal'
 import { UpdateAnswer } from '../UpdateAnswer'
+import { format } from 'date-fns';
+import { DeleteTopic } from '../DeleteTopic'
 
 type Props = {
-  onClose?: () => void
+  onClose: () => void
   selectedTopic: any
   student?: any
 }
@@ -19,7 +21,9 @@ export const SelectedTopic = ({ onClose, selectedTopic, student }: Props) => {
   const [addNewAnswer, setAddNewAnswer] = useState<boolean>(false)
   const [invalid, setInvalid] = useState<boolean>(false)
   const [currentAnswer, setCurrentAnswer] = useState()
-  const [isEditModalVisible, setIsEditModalVisible] = useState(false)
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [modalType, setModalType] = useState("");
+  const [showSelectTopicLayout, setShowSelectTopicLayout] = useState(true);
 
   const data = {
     idTopico: selectedTopic.idTopico,
@@ -31,6 +35,8 @@ export const SelectedTopic = ({ onClose, selectedTopic, student }: Props) => {
       PostService.registerAnswer(data).then(
         (response: any) => {
           console.log(response.data)
+          onClose()
+          setAddNewAnswer(false)
         },
         (error: any) => {
           console.log(
@@ -49,117 +55,145 @@ export const SelectedTopic = ({ onClose, selectedTopic, student }: Props) => {
   }
 
   const handleUpdateAnswer = (answer: any) => {
+    setModalType("edit");
     setCurrentAnswer(answer)
-    setIsEditModalVisible(true)
+    setIsModalVisible(true);
+    setShowSelectTopicLayout(false);
+    console.log(answer);
+
   }
 
   const handleDeleteAnswer = (answer: any) => {
-    PostService.deleteAnswer(answer.idResposta).then(
-      (response: any) => {
-        console.log(response.data)
-      },
-      (error: any) => {
-        console.log('DELETE/STUDENT/FORUM/deleteAnswer: Erro', error.response)
-        if (error.response && error.response.status === 403) {
-          console.log('DELETE/STUDENT/FORUM/deleteAnswer: Erro de autenticação')
-        }
-      }
-    )
+    setModalType("delete");
+    setCurrentAnswer(answer)
+    setIsModalVisible(true);
+    setShowSelectTopicLayout(false);
+
   }
 
-  return (
-    <div className={style.box}>
-      <div className={style.row}>
-        <div className={style.card}>
-          <div>
-            <h1>{selectedTopic.titulo}</h1>
-            <p>{selectedTopic.descricao}</p>
-          </div>
-          <div className={style.cInfo}>
-            <h6>
-              Postada em {selectedTopic.dataCriacao} por {selectedTopic.nome}
-              {selectedTopic.sobrenome}
-            </h6>
-            <button
-              className={style.btnAdd}
-              onClick={() => setAddNewAnswer(true)}
-            >
-              Adicionar resposta
-            </button>
-          </div>
-        </div>
-      </div>
+  const handleCloseModal = () => {
+    setIsModalVisible(false);
+    setShowSelectTopicLayout(true);
+  }
 
-      <div className={style.col}>
-        {answers.map((answer: any, index: number) => (
-          <div key={answer.idTopico} className={style.sAnswer}>
-            <div className={style.info}>
-              <p>{answer.resposta}</p>
-            </div>
-            <div className={style.date}>
+
+
+  const formattedDateQuestion = format(new Date(selectedTopic.dataCriacao), 'dd/MM/yyyy');
+
+  return (
+    <>
+      <div className={style.box}>
+        {showSelectTopicLayout && (
+          <div className={style.row}>
+            <div className={style.card}>
               <div>
-                Respondido em <span> {answer.dataCriacao} </span> por
-                <span>
-                   {" "}{answer.usuario.nome} {answer.usuario.sobrenome}
-                </span>
+                <h1>{selectedTopic.titulo}</h1>
+                <p>{selectedTopic.descricao}</p>
               </div>
-              {student.name == selectedTopic.respostas[index].usuario.nome && (
-                <div>
-                  <img
-                    src={iconEdit}
-                    onClick={() => handleUpdateAnswer(answer)}
-                  />
-                  <img
-                    src={iconDelete}
-                    onClick={() => handleDeleteAnswer(answer)}
-                  />
-                </div>
-              )}
-            </div>
-          </div>
-        ))}
-        {addNewAnswer && (
-          <div className={style.saveAnswer}>
-            <textarea
-              placeholder="Corpo da resposta"
-              value={newAnswer}
-              onChange={(e: any) => setNewAnswer(e.target.value)}
-              onBlur={() => {
-                if (newAnswer == '') {
-                  setInvalid(true)
-                }
-              }}
-            />
-            <Button
-              className={style.save}
-              title="Salvar resposta"
-              onClick={saveAnswer}
-            />
-            <div className={style.error}>
-              {invalid && <p>Resposta não pode ser vazia.</p>}
+              <div className={style.cInfo}>
+                <h6>
+                  Postada em {formattedDateQuestion} por {selectedTopic.nome}
+                  {selectedTopic.sobrenome}
+                </h6>
+                <button
+                  className={style.btnAdd}
+                  onClick={() => setAddNewAnswer(true)}
+                >
+                  Adicionar resposta
+                </button>
+              </div>
             </div>
           </div>
         )}
-      </div>
-      <div className={style.footer}>
-        <div>
-          <Button className={style.btn} title="Fechar" onClick={onClose} />
-        </div>
-      </div>
+        {showSelectTopicLayout && (
+          <><div className={style.col}>
+            {answers.map((answer: any, index: number) => (
+              <div key={answer.idTopico} className={style.sAnswer}>
+                <div className={style.info}>
+                  <p>{answer.resposta}</p>
+                </div>
+                <div className={style.date}>
+                  <div>
+                    Respondido em <span> {new Date(answer.dataCriacao).toLocaleDateString('pt-BR')} </span> por
+                    <span>
+                      {" "}{answer.usuario.nome} {answer.usuario.sobrenome}
+                    </span>
+                  </div>
+                  {student.name == selectedTopic.respostas[index].usuario.nome && (
+                    <div >
+                      <img
+                        src={iconEdit}
+                        onClick={() => handleUpdateAnswer(answer)}
+                        role="button"
+                        aria-label="editar tópico"
+                      />
+                      <img
+                        src={iconDelete}
+                        onClick={() => handleDeleteAnswer(answer)}
+                        role="button"
+                        aria-label="deletar tópico"
+                      />
+                    </div>
 
-      {isEditModalVisible && (
-        <>
+                  )}
+                </div>
+              </div>
+            ))}
+
+            {addNewAnswer && (
+              <div className={style.saveAnswer}>
+                <textarea
+                  placeholder="Corpo da resposta"
+                  value={newAnswer}
+                  onChange={(e: any) => setNewAnswer(e.target.value)}
+                  onBlur={() => {
+                    if (newAnswer == '') {
+                      setInvalid(true)
+                    }
+                  }}
+                />
+                <Button
+                  className={style.save}
+                  title="Salvar resposta"
+                  onClick={saveAnswer}
+                />
+
+                <div className={style.error}>
+                  {invalid && <p>Resposta não pode ser vazia.</p>}
+                </div>
+
+              </div>
+            )}
+          </div>
+            <div className={style.footer}>
+              <div>
+                <Button className={style.btn} title="Fechar" onClick={onClose} />
+              </div>
+            </div></>
+
+        )}
+        {isModalVisible && (
           <Modal
-            isOpen={isEditModalVisible}
-            onClose={() => setIsEditModalVisible(false)}
+            isBottomless
+            isOpen={isModalVisible}
+            onClose={handleCloseModal}
           >
-            <UpdateAnswer
-              selectedAnswer={currentAnswer}
-              onClose={() => setIsEditModalVisible(false)}
-            />
+            {modalType === "edit" && (
+              <UpdateAnswer
+                selectedAnswer={currentAnswer}
+                onClose={handleCloseModal}
+              />
+            )}
+            {modalType === "delete" && (
+              <DeleteTopic
+                isAnswer
+                selectedAnswer={currentAnswer}
+                onClose={handleCloseModal}
+              />
+            )}
           </Modal>
-        </>
-      )}
-    </div>
+        )}
+      </div>
+    </>
   )
 }

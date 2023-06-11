@@ -85,11 +85,13 @@ export const Home = () => {
         </>
       ) : (
         <div className={style.innerContainer}>
-          <SearchBar
-            placeholder="O que você deseja estudar hoje?"
-            value={search}
-            onChange={(e: any) => setSearch(e.target.value)}
-          />
+          <div className={style.cSearchBar}>
+            <SearchBar
+              placeholder="O que você deseja estudar hoje?"
+              value={search}
+              onChange={(e: any) => setSearch(e.target.value)}
+            />
+          </div>
           <div className={style.cards}>
             {content &&
               content

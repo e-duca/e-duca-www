@@ -60,6 +60,7 @@ export const Student = () => {
         selectedItem={chosenItem}
       />
       <div className={style.innerContainer}>{chosenComponent}</div>
+
     </div>
   )
 }

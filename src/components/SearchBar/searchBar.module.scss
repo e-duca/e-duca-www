@@ -8,6 +8,7 @@
   border: groove 2px;
   margin: 40px 0;
   display: flex;
+  width: -webkit-fill-available;
 
   input {
     border: none;
@@ -17,6 +18,7 @@
     line-height: 22px;
     width: 764px;
     margin: 0 10px;
+    outline: none;
   }
 
   img {
