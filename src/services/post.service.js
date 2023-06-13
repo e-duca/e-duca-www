@@ -39,6 +39,10 @@ const registerRating = (data) => {
   return axios.post(API_URL + 'api/conteudos/avaliacoes', data, { headers: authHeader() })
 }
 
+const getRatings = () => {
+  return axios.get(API_URL + 'api/conteudos/avaliacoes/total-por-avaliacao/usuario-secao', { headers: authHeader() })
+}
+
 const getUserRatings = () => {
   return axios.get(API_URL + 'api/conteudos/avaliacoes/usuario-secao', {
     headers: authHeader()
@@ -116,7 +120,8 @@ const postService = {
   registerAnswer,
   deleteAnswer,
   updateAnswer,
-  getUserRatings
+  getUserRatings,
+  getRatings
 }
 
 export default postService

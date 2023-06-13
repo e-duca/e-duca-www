@@ -34,6 +34,21 @@ export const Home = () => {
   })
 
   useEffect(() => {
+    PostService.getUserRatings().then(
+      (response: any) => {
+        console.log('RESPONSE USER RATINGS', response)
+        setRatings(response.data.avaliacao)
+      },
+      (error: any) => {
+        console.log('HOME/Professor/getUserRating: Erro', error.response)
+        if (error.response && error.response.status === 403) {
+          console.log('HOME/Professor/getUserRating: Erro de autenticação')
+        }
+      }
+    )
+  }, [])
+
+  useEffect(() => {
     PostService.getUser().then(
       (response: any) => {
         setTeacher({
@@ -47,19 +62,6 @@ export const Home = () => {
         console.log('HOME/Professor/getUser: Erro', error.response)
         if (error.response && error.response.status === 403) {
           console.log('HOME/Professor/getUser: Erro de autenticação')
-        }
-      }
-    )
-
-    PostService.getUserRatings().then(
-      (response: any) => {
-        console.log("RESPONSE USER RATINGS", response)
-        setRatings(response.data.avaliacao)
-      },
-      (error: any) => {
-        console.log('HOME/Professor/getUserRating: Erro', error.response)
-        if (error.response && error.response.status === 403) {
-          console.log('HOME/Professor/getUserRating: Erro de autenticação')
         }
       }
     )
@@ -82,7 +84,7 @@ export const Home = () => {
         }
       }
     )
-    console.log("disparou o TEACHER CONTENT")
+    console.log('disparou o TEACHER CONTENT')
   }, [teacherContent])
 
   function handleContentClick(post: any) {
