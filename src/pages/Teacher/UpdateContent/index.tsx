@@ -208,7 +208,7 @@ export const UpdateContent = ({ onClose, contentId }: Props) => {
             onClose();
           }}
         >
-          <UpdateSuccess onClose={() => {
+          <UpdateSuccess isUpdate onClose={() => {
             setShowUpdateSuccess(false);
             onClose();
           }} />

@@ -9,7 +9,7 @@ type Props = {
 export const UpdateSuccess = ({ onClose, isUpdate }: Props) => {
   return (
     <div className={style.box}>
-      {!isUpdate ? (
+      {isUpdate ? (
         <>
           <h1>Conteúdo atualizado!</h1>
         </>

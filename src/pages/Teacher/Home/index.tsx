@@ -123,6 +123,7 @@ export const Home = () => {
         <>
           {isVideo ? (
             <VideoClass
+              isTeacher
               contentId={contentClicked.id}
               name={contentClicked.nome}
               lastName={contentClicked.sobrenome}
@@ -132,6 +133,7 @@ export const Home = () => {
             />
           ) : (
             <Reading
+              isTeacher
               contentId={contentClicked.id}
               title={contentClicked.titulo}
               text={contentClicked.texto}
